@@ -1,0 +1,87 @@
+<apex:page showHeader="false" sidebar="false" controller="X311GISConnectorClr">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
+
+  <style>
+    #search-input-container {
+      /*position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;*/
+    }
+    #search-bar {
+      /*position: absolute;
+      top: 0;*/
+      /*left: 0;*/
+      /*margin: 10px;*/
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 5px;
+      height: 50px;
+      /*z-index: 1000;*/
+    }
+    #search-input-container {
+      float: left;
+    }
+    #search-input {
+      height: 30px;
+      width: 300px;
+      font-size: 16px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    #search-button {
+      height: 35px;
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: 16px;
+    }
+    #search-status {
+      float: right;
+      padding-top: 10px;
+    }
+    #search-action {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 16px;
+    }
+    #map {
+      clear: both;
+      position: absolute;
+      top: 50px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      /*height: 100%;*/
+    }
+  </style>
+
+  <div id="container">
+    <div id="search-bar">
+      <div id="search-input-container">
+        <input id="search-input" placeholder="Enter an address to search for."
+                                 value="1234 market st"
+        />
+        <button id="search-button">Locate</button>
+      </div>
+
+      <div id="search-status">
+        <span id="search-action"></span>
+      </div>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+  <!-- JavaScript: Vendor -->
+  <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+  <script src="//unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
+  <script src="//unpkg.com/esri-leaflet@2.0.8"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/async/2.5.0/async.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.3/proj4.js"></script>
+
+  <!-- JavaScript: Local -->
+  <script src="{!URLFOR($Resource.GisConfigJs)}"></script>
+  <script src="{!URLFOR($Resource.GisAppJs)}"></script>
+  <script src="{!URLFOR($Resource.GisMapJs)}"></script>
+</apex:page>
