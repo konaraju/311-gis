@@ -361,7 +361,7 @@ var GIS = (function () {
 		fetchRelated: function (recordTypeId, x, y, callback) {
 			console.log('fetch related');
 
-			X311GISConnectorClr.QueryByRadius(recordTypeId, x, y, 500, GIS.didFetchRelated);
+			GisClient.QueryByRadius(recordTypeId, x, y, 500, GIS.didFetchRelated);
 		},
 
 		didFetchRelated: function (results, event) {
