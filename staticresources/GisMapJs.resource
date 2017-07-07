@@ -109,14 +109,29 @@ GIS.map = (function () {
 			console.log('add related markers', relateds);
 
 			_.forEach(relateds, function (related) {
-				var x = related.x,
-            y = related.y,
-					  marker = GIS.map.colorMarker(y, x, 'blue'),
-            description = related.description,
-            popup = description + '<br><a href="#" class="related-link">Relate</a>';
+				var lat = related.Centerline__Latitude__s,
+            lng = related.Centerline__Longitude__s,
+					  marker = GIS.map.colorMarker(lat, lng, 'blue'),
+            // description = related.description,
+            // popup = description + '<br><a href="#" class="related-link">Relate</a>';
+            caseNumber = related.CaseNumber,
+            caseType = related.Subject,
+            address = related.Street__c,
+            popup = '\
+              <div>' +
+                address + ': ' + caseType + '\
+              </div>\
+              <div>\
+                Case #' + caseNumber +
+              '</div>\
+              <div>\
+                <a class="relate-link" href="#">\
+                  Relate\
+                </a>\
+              </div>\
+            ';
 
         marker.bindPopup(popup);
-
 				marker.addTo(map);
 
 				relatedMarkers.push(marker);
