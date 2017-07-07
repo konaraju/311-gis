@@ -2,6 +2,10 @@
   <link rel="stylesheet" href="//unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
 
   <style>
+    /*disable button highlighting*/
+    button {
+      outline: none;
+    }
     #search-input-container {
       /*position: absolute;
       top: 0;
