@@ -119,7 +119,7 @@ GIS.map = (function () {
             address = related.Street__c,
             popup = '\
               <div>' +
-                address + ': ' + caseType + '\
+                '<strong>' + address + ': ' + caseType + '</strong>\
               </div>\
               <div>\
                 Case #' + caseNumber +
