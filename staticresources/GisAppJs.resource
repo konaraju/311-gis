@@ -371,19 +371,34 @@ var GIS = (function () {
       return geodata;
     },
 
-    fetchRelated: function (recordTypeId, x, y, callback) {
+    fetchRelated: function () {
       console.log('fetch related');
 
-      GisClient.QueryByRadius(recordTypeId, x, y, 500, GIS.didFetchRelated);
+      GIS.setSearchAction('Locating nearby cases...');
+
+      var feature = GIS.state.aisFeature,
+          coords = feature.geometry.coordinates,
+          x = coords[0],
+          y = coords[1],
+          RADIUS = GIS.config.nearbyRadius;
+
+      // get "related" cases (recent, nearby cases with the same record type)
+      var recordTypeId = window.opener && window.opener.RECORD_TYPE_ID;
+
+      // DEBUG: if no parent window, use record type id for Dangerous Sidewalk
+      if (!recordTypeId) recordTypeId = '012G00000014Gt6IAE';
+
+      // get cases with the same record type within a radius
+      GisClient.QueryByRadius(recordTypeId, x, y, RADIUS, GIS.didFetchRelated);
     },
 
     didFetchRelated: function (results, event) {
       console.log('did fetch related', results, event);
 
+      GIS.setSearchAction(null);
+
       // put markers on map
       GIS.map.addRelatedMarkers(results);
-
-      // TODO populate list on right-hand side
     },
   };
 })();
