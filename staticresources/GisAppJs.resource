@@ -138,7 +138,15 @@ var GIS = (function () {
 
       GIS.setSearchAction(null);
 
-      alert('Error while validating address: ' + errorThrown);
+      var msg;
+
+      if (errorThrown === 'NOT FOUND') {
+        msg = 'Could not locate that address. Please try another search.'
+      } else {
+        msg = 'Error while validating address: ' + errorThrown;
+      }
+
+      alert(msg);
     },
 
     showMultipleResults: function (features) {
