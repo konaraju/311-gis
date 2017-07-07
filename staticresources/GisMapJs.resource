@@ -15,27 +15,29 @@ GIS.map = (function () {
 			// create map
 			map = L.map('map', MAP_OPTIONS);
 
-          // move zoom control to bottom-right, a la google
-        	map.zoomControl.setPosition('bottomright');
+      // move zoom control to bottom-right, a la google
+    	map.zoomControl.setPosition('bottomright');
 
-        	map.attributionControl.addAttribution('City of Philadelphia GIS Services Group');
+    	map.attributionControl.addAttribution('City of Philadelphia GIS Services Group');
 
-          // DEV
-          map.on('zoomend', function (e) {
-          	console.log('zoomend', e.target.getZoom());
-          });
+      // DEV
+      map.on('zoomend', function (e) {
+      	console.log('zoomend', e.target.getZoom());
+      });
 
-          // add gsg city basemap with labels
-          // REVIEW add labels separately?
-          L.esri.tiledMapLayer({
-          	url: '//tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Slash/MapServer'
-          }).addTo(map);
+      // add gsg city basemap with labels
+      // REVIEW add labels separately?
+      L.esri.tiledMapLayer({
+      	url: '//tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Slash/MapServer',
+        maxZoom: 20,
+      }).addTo(map);
+
+      // listen for relate clicks
+      $(document).on('click', '.related-link', GIS.map.handleRelateClick);
 		},
 
 		zoomTo: function (x, y, level) {
-			// default zoom level to 15
-			level = level || 15;
-
+			level = level || 18;
 			map.setView([y, x], level);
 		},
 
@@ -108,14 +110,24 @@ GIS.map = (function () {
 
 			_.forEach(relateds, function (related) {
 				var x = related.x,
-					y = related.y,
-					marker = GIS.map.colorMarker(y, x, 'blue');
+            y = related.y,
+					  marker = GIS.map.colorMarker(y, x, 'blue'),
+            description = related.description,
+            popup = description + '<br><a href="#" class="related-link">Relate</a>';
+
+        marker.bindPopup(popup);
 
 				marker.addTo(map);
 
 				relatedMarkers.push(marker);
 			});
 		},
+
+    handleRelateClick: function (e) {
+      alert('related!');
+
+      // TODO set parent id
+    },
 	};
 })();
 
