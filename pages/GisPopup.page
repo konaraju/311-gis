@@ -22,6 +22,7 @@
       padding-top: 5px;
       height: 50px;
       /*z-index: 1000;*/
+      background: #2176d2;
     }
     #search-input-container {
       float: left;
@@ -44,6 +45,7 @@
       padding-top: 10px;
     }
     #search-action {
+      color: #ffffff;
       font-weight: bold;
       font-style: italic;
       font-size: 16px;
