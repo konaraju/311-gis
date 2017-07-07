@@ -73,7 +73,7 @@ var GIS = (function () {
 		fetchAis: function (inputAddress) {
       console.log("fetch ais:", inputAddress);
 
-      var url = 'https://api.phila.gov/ais/v1/addresses/' + encodeURIComponent(inputAddress);
+      var url = '//api.phila.gov/ais/v1/addresses/' + encodeURIComponent(inputAddress);
 
       $.ajax({
       	url: url,
