@@ -110,6 +110,14 @@ var GIS = (function () {
 
       if (resultCount === 1) {
         var feature = features[0];
+
+        // WORKAROUND ais returns pipe-delimited address keys, so split them
+        // and take the first one
+        var addressKeysJoined = feature.properties.li_address_key || '',
+            addressKeys = addressKeysJoined.split('|'),
+            addressKey = addressKeys.length > 0 ? addressKeys[0] : null;
+        feature.properties.li_address_key = addressKey;
+
         GIS.didGetValidAddress(feature);
 
       // if we got multiple results
