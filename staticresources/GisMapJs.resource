@@ -114,6 +114,7 @@ GIS.map = (function () {
             marker = GIS.map.colorMarker(lat, lng, 'blue'),
             // description = related.description,
             // popup = description + '<br><a href="#" class="related-link">Relate</a>';
+            caseId = related.Id,
             caseNumber = related.CaseNumber,
             caseType = related.Subject,
             address = related.Street__c,
@@ -125,7 +126,11 @@ GIS.map = (function () {
                 Case #' + caseNumber +
               '</div>\
               <div>\
-                <a class="relate-link" href="#">\
+                <a class="relate-link"\
+                   href="#"\
+                   data-case-id="' + caseId + '" \
+                   data-case-number="' + caseNumber + '"\
+                 >\
                   Relate\
                 </a>\
               </div>\
@@ -139,9 +144,18 @@ GIS.map = (function () {
     },
 
     handleRelateClick: function (e) {
-      alert('related!');
+      console.log('handle relate click', e);
 
-      // TODO set parent id
+      // get ids
+      var $link = $(this),
+          caseId = $link.attr('data-case-id'),
+          caseNumber = $link.attr('data-case-number');
+
+      // to "relate" one case to another, we set the parent id to the related's
+      // case id.
+      GIS.saveGeodata(caseId);
+
+      alert('This case has been related to case #' + caseNumber + '.');
     },
   };
 })();
