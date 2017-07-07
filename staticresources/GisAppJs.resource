@@ -1,4 +1,8 @@
 var GIS = (function () {
+  var $multipleResultsModal,
+      $multipleResultsSelect,
+      $multipleResultsButton,
+      ANIMATION_DELAY = ANIMATION_DELAY; // milliseconds
 
   return {
     config: GIS_CONFIG,
@@ -14,6 +18,35 @@ var GIS = (function () {
   		});
 
       $('#search-button').click(GIS.handleSearchButtonClick);
+
+      /*
+      MULTIPLE RESULTS MODAL
+      */
+
+      $multipleResultsModal = $('#multiple-results-modal');
+      $multipleResultsSelect = $multipleResultsModal.find('select');
+      $multipleResultsButton = $multipleResultsModal.find('button');
+
+      // callbacks
+      $('.modal-close').click(function (e) {
+        $multipleResultsModal.fadeOut(ANIMATION_DELAY);
+      });
+      $('.modal').click(function (e) {
+        $multipleResultsModal.fadeOut(ANIMATION_DELAY);
+      });
+      $('.modal-content').click(function (e) {
+        e.stopPropagation();
+      });
+      // $multipleResultsSelect.change(function (e) {
+      $multipleResultsButton.click(function (e) {
+        var val = $multipleResultsSelect.val();
+        // geocode
+        GIS.fetchAis(val);
+        // empty dropdown
+        $multipleResultsSelect.empty()
+        // hide modal
+        $multipleResultsModal.fadeOut(ANIMATION_DELAY);
+      });
     },
 
     updateSearchAction: function (action) {
@@ -33,15 +66,6 @@ var GIS = (function () {
 			// $('#multiple').css('display','none');
 			var inputAddress = $('#search-input').val();
 			GIS.fetchAis(inputAddress);
-		},
-
-		// handle clicks to the locate button in the multiple result selector
-		handleSearchButtonClickMultiple: function (e) {
-			var selected = $('#selectAddress').val();
-
-			console.log('did select from multiple:', selected);
-
-			this.fetchAis(selected);
 		},
 
 		// this function gets user input and queries the Address Information System. this is
@@ -80,7 +104,7 @@ var GIS = (function () {
 			// if we got multiple results
 			} else if (resultCount > 1) {
 				// show dropdown
-				populateMultipleResultDropdown(features);
+				GIS.showMultipleResults(features);
 
 			// if we got no results
 			} else {
@@ -98,21 +122,14 @@ var GIS = (function () {
 			alert('Error while validating address: ' + errorThrown);
 		},
 
-		populateMultipleResultDropdown: function (features) {
-			var $select = $('#selectAddress');
+		showMultipleResults: function (features) {
+      _.forEach(features, function (feature) {
+        var address = feature.properties.street_address,
+            $option = $('<option>').text(address);
+        $multipleResultsSelect.append($option);
+      });
 
-			$select.empty();
-
-			_.each(features, function (feature) {
-				console.log('feature', feature);
-				var address = feature.properties.street_address;
-				var $opt = $('<option>')
-								.text(address)
-								.val(address);
-				$select.append($opt);
-			});
-
-			$('#multiple').show();
+      $multipleResultsModal.fadeIn(ANIMATION_DELAY);
 		},
 
 		didGetValidAddress: function (feature) {
