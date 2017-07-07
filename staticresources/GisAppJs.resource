@@ -6,6 +6,12 @@ var GIS = (function () {
 
   return {
     config: GIS_CONFIG,
+    // initial state. this is really only here to spec out what the state looks
+    // like.
+    state: {
+      aisFeature: {},
+      layerInfo: {},
+    },
     init: function () {
       // configure proj4 to use local state plane projection
       proj4.defs('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667 +lat_2=39.93333333333333 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs ');
@@ -74,6 +80,10 @@ var GIS = (function () {
       console.log("fetch ais:", inputAddress);
 
       var url = '//api.phila.gov/ais/v1/addresses/' + encodeURIComponent(inputAddress);
+
+      // clear out state
+      GIS.state.aisFeature = null;
+      GIS.state.layerInfo = null;
 
       $.ajax({
         url: url,
@@ -145,22 +155,17 @@ var GIS = (function () {
       GIS.map.addGeocodeMarker(x, y, address);
       GIS.map.zoomTo(x, y);
 
-      // get "related" cases (recent, nearby cases with the same record type)
-      var recordTypeId = window.opener && window.opener.RECORD_TYPE_ID;
-
-      // DEBUG: if no parent window, use record type id for Dangerous Sidewalk
-      if (!recordTypeId) recordTypeId = '012G00000014Gt6IAE';
-
-      GIS.fetchRelated(recordTypeId, x, y);
-
       // fetch layer info
       var layerInfo = GIS.fetchLayerInfo(feature, null);
+
+      // save to state
+      GIS.state.aisFeature = feature;
     },
 
     fetchLayerInfo: function (feature, caseType) {
       console.log('fetch layer info', feature, caseType);
 
-      GIS.updateSearchAction('Querying layers...');
+      GIS.setSearchAction('Querying layers...');
 
       //var GIS_BASE_URL = '{!$Setup.GIS__c.ESRIServices__c}' + '/',
       var queryLayers = GIS.config.queryLayers,
@@ -270,8 +275,6 @@ var GIS = (function () {
         queryLayerFns,
         // then do this
         function (err, results) {
-          GIS.updateSearchAction(null);
-
           // check for an error
           if (err) {
             console.log('async parallel error:', err);
@@ -280,7 +283,14 @@ var GIS = (function () {
 
           console.log('async parallel finished', results);
 
-          GIS.saveGeodata(feature, results);
+          // save to state
+          GIS.state.layerInfo = results;
+
+          // get related cases
+          GIS.fetchRelated();
+
+          // pass back to parent
+          GIS.saveGeodata();
         }
       );
     },
