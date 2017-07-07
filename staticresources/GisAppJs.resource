@@ -79,6 +79,7 @@ var GIS = (function () {
       	url: url,
       	data: {
       		include_units: true,
+          on_street: true,
       		opa_only: true,
       		gatekeeperKey: 'cb076d7301c315ba0f039b8f7744ac6d',
       	},
