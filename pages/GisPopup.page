@@ -99,7 +99,7 @@
   <div id="container">
     <div id="search-bar">
       <div id="search-input-container">
-        <input id="search-input" placeholder="Enter an address to search for."/>
+        <input id="search-input" placeholder="Enter an address to search for"/>
         <button id="search-button" class="search-button">Locate</button>
       </div>
 
