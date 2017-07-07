@@ -1,4 +1,8 @@
 var GIS_CONFIG = {
+  // this is the radius within which to search for nearby (aka "related") cases
+  // (in feet)
+  nearbyRadius: 500,
+  // these are the layers that related data get pulled from
   queryLayers: {
     demoPermit: {
       type: 'esri',
