@@ -33,7 +33,7 @@ GIS.map = (function () {
       }).addTo(map);
 
       // listen for relate clicks
-      $(document).on('click', '.related-link', GIS.map.handleRelateClick);
+      $(document).on('click', '.relate-link', GIS.map.handleRelateClick);
     },
 
     zoomTo: function (x, y, level) {
