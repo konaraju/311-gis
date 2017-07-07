@@ -296,11 +296,18 @@ var GIS = (function () {
       );
     },
 
-    saveGeodata: function (feature, layerInfo) {
+    // this takes an optional argument `parentId` which is used when relating
+    // cases
+    saveGeodata: function (parentId) {
       console.log('save geodata', feature, layerInfo);
 
+      var state = GIS.state,
+          feature = state.aisFeature,
+          layerInfo = state.layerInfo;
+          // parentId = state.parentId;
+
       // pass data back to parent window
-      var geodata = GIS.createGeodataObject(feature, layerInfo);
+      var geodata = GIS.createGeodataObject(feature, layerInfo, parentId);
       console.log('geodata', geodata);
 
       // DEBUG: if window.opener isn't defined, we're probably just testing this
