@@ -277,6 +277,7 @@ var GIS = (function () {
         function (err, results) {
           // check for an error
           if (err) {
+            alert('An error occurred while querying layers. Please try again.');
             console.log('async parallel error:', err);
             return;
           }
