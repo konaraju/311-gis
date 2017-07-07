@@ -20,7 +20,7 @@ GIS.map = (function () {
 
       map.attributionControl.addAttribution('City of Philadelphia GIS Services Group');
 
-      // DEV
+      // DEBUG but useful and harmless so i'm leaving it on :)
       map.on('zoomend', function (e) {
         console.log('zoomend', e.target.getZoom());
       });
