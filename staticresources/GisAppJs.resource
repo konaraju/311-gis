@@ -2,7 +2,7 @@ var GIS = (function () {
   var $multipleResultsModal,
       $multipleResultsSelect,
       $multipleResultsButton,
-      ANIMATION_DELAY = ANIMATION_DELAY; // milliseconds
+      ANIMATION_DELAY = 250; // milliseconds
 
   return {
     config: GIS_CONFIG,
