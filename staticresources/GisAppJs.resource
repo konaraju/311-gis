@@ -314,7 +314,7 @@ var GIS = (function () {
     },
 
     // takes an ais feature and formats it as a "geodata" object which the parent window can understand.
-    createGeodataObject: function (feature, layerInfo) {
+    createGeodataObject: function (feature, layerInfo, parentId) {
       console.log('create geodata object', feature, layerInfo);
 
       var props = feature.properties,
@@ -344,9 +344,10 @@ var GIS = (function () {
           // this doesn't seem to be used
           featureData: null,
 
-          // TODO populate this based on if there's a related case
-          parentId: null,
-          // this seems to be related to the parent case
+          // this gets passed in when "relating" one case to another
+          parentId: parentId,
+
+          // REVIEW this seems to be related to the parent case
           label: null,
 
           x: coords[0],
