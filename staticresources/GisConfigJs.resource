@@ -117,4 +117,50 @@ var GIS_CONFIG = {
         }
     },
   },
+  // this is a mapping of ULRS-style service area names to AIS ones
+  serviceAreas: {
+    SA_PLANNING_2016Councilmanic: 'council_district_2016',
+    SA_PLANNING_Ward: 'political_ward',
+    SA_PLANNING_Ward_Divisions: 'political_division',
+    SA_STREETS_ZipCode: '',
+    SA_POLICE_District: 'police_district',
+    SA_POLICE_Division: 'police_division',
+    SA_STREETS_Recycling: 'rubbish_recycle_day',
+    SA_STREETS_Rubbish: 'rubbish_recycle_day',
+    SA_STREETS_Rubbish_Recyc: 'rubbish_recycle_day',
+    SA_STREETS_Leaf: 'leaf_collection_area',
+    SA_STREETS_HISTORIC: 'historic_street',
+    SA_SCHOOLS_Elementary_School_Catchment: 'elementary_school',
+    SA_SCHOOLS_Middle_School_Catchment: 'middle_school',
+    SA_SCHOOLS_High_School_Catchment: 'high_school',
+    SA_STREETS_Highway_District: 'highway_district',
+    SA_STREETS_Highway_Section: 'highway_section',
+    SA_STREETS_Highway_Subsection: 'highway_subsection',
+    SA_PLANNING_Planning_Districts: 'planning_district',
+    SA_PWD_CenterCityDistrict: 'pwd_center_city_district',
+    SA_CENTER_CITY_DISTRICT: 'center_city_district',
+    SA_STREETS_Recycling_Diversion_Rate: 'recycling_diversion_rate',
+    SA_STREETS_Sanitation_Area: 'sanitation_area',
+    SA_STREETS_Sanitation_Districts: 'sanitation_district',
+    SA_STREETS_Street_Lights_Routes: 'street_light_route',
+    SA_Streets_Traffic_District: 'traffic_district',
+    SA_Streets_Traffic_PM_District: 'traffic_pm_district',
+    SA_PHILLYRISING: 'philly_rising_area',
+    PWD_MAINT_DIST: 'pwd_maint_district',
+    PWD_PRES_DIST: 'pwd_pressure_district',
+    PWD_WTPSA: 'pwd_treatment_plant',
+    SA_LNI_DISTRICT: 'li_district',
+    SA_POLICE_PSA: 'police_service_area',
+    SA_WATER_Water_Plate_Index: 'pwd_water_plate',
+
+    // don't think these exist in ais
+    // SA_PLANNING_2000CensusTract,
+    // SA_PLANNING_2000CensusBlockGroup
+    // SA_PLANNING_2000CensusBlock
+    // SA_PLANNING_2000CensusBlock
+    // SA_PLANNING_2010CensusBlockGroup
+    // SA_PLANNING_2010CensusBlockGroup
+    // SA_PLANNING_2010CensusBlockGroup
+    // SA_RECREATION_Recreation_District
+  }
 };

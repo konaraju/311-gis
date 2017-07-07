@@ -366,14 +366,16 @@ var GIS = (function () {
 
           // this seems to be where service area values go
           attributes: {
-            SA_STREETS_ZipCode: props.zip_code,
-            SA_PHILLYRISING: props.philly_rising_area,
-            SA_POLICE_District: props.police_district,
-            SA_STREETS_Rubbish: props.rubbish_recycle_day,
-            SA_PLANNING_2016Councilmanic: props.council_district_2016,
-            SA_STREETS_Sanitation_Districts: props.sanitation_district,
           }
         };
+
+      // map service areas
+      var serviceAreas = GIS.config.serviceAreas;
+
+      _.forOwn(serviceAreas, function (aisKey, ulrsKey) {
+        var val = props[aisKey];
+        geodata.attributes[ulrsKey] = val;
+      });
 
       return geodata;
     },
