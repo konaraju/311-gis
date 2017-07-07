@@ -29,7 +29,7 @@ GIS.map = (function () {
       // REVIEW add labels separately?
       L.esri.tiledMapLayer({
       	url: '//tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Slash/MapServer',
-        maxZoom: 20,
+        maxZoom: 22,
       }).addTo(map);
 
       // listen for relate clicks
