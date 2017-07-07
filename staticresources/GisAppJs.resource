@@ -55,7 +55,7 @@ var GIS = (function () {
       });
     },
 
-    updateSearchAction: function (action) {
+    setSearchAction: function (action) {
       $('#search-action').text(action);
     },
 
@@ -68,7 +68,7 @@ var GIS = (function () {
 
     // handle clicks to the locate button
     handleSearchButtonClick: function (e) {
-      GIS.updateSearchAction('Validating address...');
+      GIS.setSearchAction('Validating address...');
       // $('#multiple').css('display','none');
       var inputAddress = $('#search-input').val();
       GIS.fetchAis(inputAddress);
@@ -102,7 +102,7 @@ var GIS = (function () {
     didFetchAis: function (data) {
       console.log('did fetch ais', data);
 
-      GIS.updateSearchAction(null);
+      GIS.setSearchAction(null);
 
       // check number of results
       var features = data.features,
@@ -128,7 +128,7 @@ var GIS = (function () {
     didNotFetchAis: function (jqXHR, textStatus, errorThrown) {
       console.log('error fetching ais:', errorThrown, jqXHR);
 
-      GIS.updateSearchAction(null);
+      GIS.setSearchAction(null);
 
       alert('Error while validating address: ' + errorThrown);
     },
