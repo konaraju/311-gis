@@ -1,5 +1,5 @@
-<apex:page showHeader="false" sidebar="false" controller="X311GISConnectorClr">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
+<apex:page showHeader="false" sidebar="false" controller="GisClient">
+  <link rel="stylesheet" href="//unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
 
   <style>
     #search-input-container {
