@@ -71,20 +71,20 @@ var GIS = (function () {
 		// this function gets user input and queries the Address Information System. this is
 		// intended to replace the Address Candidate function.
 		fetchAis: function (inputAddress) {
-            console.log("fetch ais:", inputAddress);
+      console.log("fetch ais:", inputAddress);
 
-            var url = 'https://api.phila.gov/ais/v1/addresses/' + encodeURIComponent(inputAddress);
+      var url = 'https://api.phila.gov/ais/v1/addresses/' + encodeURIComponent(inputAddress);
 
-            $.ajax({
-            	url: url,
-            	data: {
-            		include_units: true,
-            		opa_only: true,
-            		gatekeeperKey: 'cb076d7301c315ba0f039b8f7744ac6d',
-            	},
-            	success: GIS.didFetchAis,
-            	error: GIS.didNotFetchAis,
-            });
+      $.ajax({
+      	url: url,
+      	data: {
+      		include_units: true,
+      		opa_only: true,
+      		gatekeeperKey: 'cb076d7301c315ba0f039b8f7744ac6d',
+      	},
+      	success: GIS.didFetchAis,
+      	error: GIS.didNotFetchAis,
+      });
 		},
 
 		// on successful ais fetch
