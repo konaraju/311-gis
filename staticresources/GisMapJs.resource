@@ -98,7 +98,20 @@ GIS.map = (function () {
 
       geocodeMarker = this.colorMarker(y, x, 'yellow');
 
-      geocodeMarker.bindPopup('<strong>' + address + '</strong>');
+      var popup = '\
+        <div>\
+          <strong>' + address + '</strong>' + '\
+        </div>\
+        <div>\
+          <a href="http://atlas.phila.gov/#/' + address + '/" target="_blank">\
+            See more in Atlas <span class="fa fa-external-link"></span>\
+          </a>\
+        </div>\
+      ';
+
+      geocodeMarker.bindPopup(popup, {
+        minWidth: 130,
+      });
 
       geocodeMarker.addTo(map);
 
