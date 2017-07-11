@@ -1,5 +1,6 @@
 var GIS = (function () {
   var $searchInput,
+      $searchAction,
       $multipleResultsModal,
       $multipleResultsSelect,
       $multipleResultsButton,
@@ -18,6 +19,7 @@ var GIS = (function () {
       proj4.defs('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667 +lat_2=39.93333333333333 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs ');
 
       $searchInput = $('#search-input');
+      $searchAction = $('#search-action');
 
       // check for search input from parent page
       if (window.opener) {
@@ -65,7 +67,12 @@ var GIS = (function () {
     },
 
     setSearchAction: function (action) {
-      $('#search-action').text(action);
+      // append ellipsis
+      action && (action += '...');
+      // set text
+      $searchAction.text(action);
+      // show search status if there's an action
+      $('#search-status').toggle(!!action);
     },
 
     toCamelCase: function (s) {
@@ -77,9 +84,9 @@ var GIS = (function () {
 
     // handle clicks to the locate button
     handleSearchButtonClick: function (e) {
-      GIS.setSearchAction('Validating address...');
+      GIS.setSearchAction('Validating address');
       // $('#multiple').css('display','none');
-      var inputAddress = $('#search-input').val();
+      var inputAddress = $searchInput.val();
       GIS.fetchAis(inputAddress);
     },
 
@@ -190,7 +197,7 @@ var GIS = (function () {
     fetchLayerInfo: function (feature, caseType) {
       console.log('fetch layer info', feature, caseType);
 
-      GIS.setSearchAction('Querying layers...');
+      GIS.setSearchAction('Querying layers');
 
       //var GIS_BASE_URL = '{!$Setup.GIS__c.ESRIServices__c}' + '/',
       var queryLayers = GIS.config.queryLayers,
@@ -408,7 +415,7 @@ var GIS = (function () {
     fetchRelated: function () {
       console.log('fetch related');
 
-      GIS.setSearchAction('Locating nearby cases...');
+      GIS.setSearchAction('Locating nearby cases');
 
       var feature = GIS.state.aisFeature,
           coords = feature.geometry.coordinates,

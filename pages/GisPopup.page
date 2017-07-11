@@ -34,12 +34,18 @@
     #search-status {
       float: right;
       padding-top: 10px;
+      display: none;
     }
     #search-action {
       color: #ffffff;
       font-size: 16px;
       font-style: italic;
       font-weight: bold;
+    }
+    #search-spinner {
+      color: #ffffff;
+      margin-right: 3px;
+      margin-top: -2px;
     }
     #map {
       clear: both;
@@ -106,6 +112,7 @@
       </div>
 
       <div id="search-status">
+        <span id="search-spinner" class="fa fa-spinner fa-lg fa-pulse"></span>
         <span id="search-action"></span>
       </div>
     </div>
