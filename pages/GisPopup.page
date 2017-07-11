@@ -139,6 +139,12 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/async/2.5.0/async.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.3/proj4.js"></script>
 
+  <!-- Sentry for error logging -->
+  <script src="//cdn.ravenjs.com/3.16.1/raven.min.js" crossorigin="anonymous"></script>
+  <script>
+    Raven.config('https://e1b674da28104b5aa6e3be5222684fc8@sentry.io/190393').install()
+  </script>
+
   <!-- JavaScript: Local -->
   <script src="{!URLFOR($Resource.GisConfigJs)}"></script>
   <script src="{!URLFOR($Resource.GisAppJs)}"></script>
