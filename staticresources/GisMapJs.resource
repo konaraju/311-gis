@@ -61,15 +61,15 @@ GIS.map = (function () {
       }
 
       var iconUrl = '//cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-' + color + '.png',
-        icon = new L.Icon({
+          icon = new L.Icon({
           iconUrl: iconUrl,
           shadowUrl: '//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41],
-        }),
-        marker = new L.marker([lat, lng], {icon: icon});
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41],
+          }),
+          marker = new L.marker([lat, lng], {icon: icon});
 
       console.log('marker', marker);
 
