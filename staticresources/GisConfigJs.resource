@@ -132,7 +132,8 @@ var GIS_CONFIG = {
     SA_PLANNING_2016Councilmanic: 'council_district_2016',
     SA_PLANNING_Ward: 'political_ward',
     SA_PLANNING_Ward_Divisions: 'political_division',
-    SA_STREETS_ZipCode: '',
+    // this is not a service area in ais
+    // SA_STREETS_ZipCode: '',
     SA_POLICE_District: 'police_district',
     SA_POLICE_Division: 'police_division',
     SA_STREETS_Recycling: 'rubbish_recycle_day',

@@ -162,12 +162,40 @@ var GIS = (function () {
 
     showMultipleResults: function (features) {
       _.forEach(features, function (feature) {
-        var address = feature.properties.street_address,
+        var address = GIS.addressForFeature(feature),
             $option = $('<option>').text(address);
         $multipleResultsSelect.append($option);
       });
 
       $multipleResultsModal.fadeIn(ANIMATION_DELAY);
+    },
+
+    // returns the fully-standardized street address for an ais feature
+    addressForFeature(feature) {
+      var props = feature.properties,
+          featureType = feature.ais_feature_type,
+          address;
+
+      // form address based on the feature type
+      switch(featureType) {
+        case 'address':
+          address = props.street_address;
+          break;
+
+        case 'intersection':
+          var comps = [
+                props.street_1.street_full,
+                props.street_2.street_full
+              ],
+              address = comps.join(' & ');
+          break;
+
+        default:
+          throw new Error('Unhandled feature type: ' + featureType);
+          break;
+      }
+
+      return address;
     },
 
     didGetValidAddress: function (feature) {
@@ -176,17 +204,26 @@ var GIS = (function () {
       var coords = feature.geometry.coordinates,
         x = coords[0],
         y = coords[1],
-        address = feature.properties.street_address;
+        address = GIS.addressForFeature(feature);
 
       // add marker and zoom
       GIS.map.addGeocodeMarker(x, y, address);
       GIS.map.zoomTo(x, y);
 
-      // fetch layer info
-      var layerInfo = GIS.fetchLayerInfo(feature, null);
-
       // save to state
       GIS.state.aisFeature = feature;
+
+      // if it's an address, get layer info
+      if (feature.ais_feature_type === 'address') {
+        var layerInfo = GIS.fetchLayerInfo(feature, null);
+      // otherwise call the remaining two functions
+      } else {
+        // pass data back to parent
+        GIS.saveGeodata();
+
+        // get related/nearby cases
+        GIS.fetchRelated();
+      }
     },
 
     fetchLayerInfo: function (feature, caseType) {
@@ -314,11 +351,11 @@ var GIS = (function () {
           // save to state
           GIS.state.layerInfo = results;
 
-          // get related cases
-          GIS.fetchRelated();
-
-          // pass back to parent
+          // pass data back to parent
           GIS.saveGeodata();
+
+          // get related/nearby cases
+          GIS.fetchRelated();
         }
       );
     },
@@ -352,18 +389,20 @@ var GIS = (function () {
       console.log('create geodata object', feature, layerInfo);
 
       var props = feature.properties,
-        coords = feature.geometry.coordinates,
-        coordsStatePlane = proj4('EPSG:2272', coords),
-        // parent page checks for the token `Intersection`, so camel case this
-        matchType = GIS.toCamelCase(feature.ais_feature_type),
-        addressKey = (props.li_address_key || '').split('|')[0];
+          coords = feature.geometry.coordinates,
+          coordsStatePlane = proj4('EPSG:2272', coords),
+          // parent page checks for the token `Intersection`, so camel case this
+          matchType = GIS.toCamelCase(feature.ais_feature_type),
+          addressKey = (props.li_address_key || '').split('|')[0];
 
-      // we're now getting the L&I district from AIS, so update layer info
-      layerInfo.district = props.li_district;
+      // we're now getting the L&I district from AIS
+      if (layerInfo) {
+        layerInfo.district = props.li_district;
+      }
 
       var geodata = {
           gisData: {
-            standardizedAddress: props.street_address,
+            standardizedAddress: GIS.addressForFeature(feature),
             matchType: matchType,
             // address keys are pipe-delimited, so take the first one
             addressKey: addressKey,
@@ -393,6 +432,8 @@ var GIS = (function () {
 
           // this seems to be where service area values go
           attributes: {
+            // this is not a service area in ais, so fake it like this.
+            SA_STREETS_ZipCode: props.zip_code,
           }
         };
 
