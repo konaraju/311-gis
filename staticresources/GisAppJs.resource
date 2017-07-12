@@ -161,6 +161,8 @@ var GIS = (function () {
     },
 
     showMultipleResults: function (features) {
+      $multipleResultsSelect.empty();
+      
       _.forEach(features, function (feature) {
         var address = GIS.addressForFeature(feature),
             $option = $('<option>').text(address);
