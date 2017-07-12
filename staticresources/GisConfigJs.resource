@@ -2,6 +2,16 @@ var GIS_CONFIG = {
   // this is the radius within which to search for nearby (aka "related") cases
   // (in feet)
   nearbyRadius: 500,
+  // Address Information System config. this is the api that handles geocoding.
+  ais: {
+    baseUrl: '//api.phila.gov/ais/v1/search/',
+    params: {
+      include_units: true,
+      on_street: true,
+      opa_only: true,
+      gatekeeperKey: 'cb076d7301c315ba0f039b8f7744ac6d',
+    },
+  },
   // these are the layers that related data get pulled from
   queryLayers: {
     demoPermit: {

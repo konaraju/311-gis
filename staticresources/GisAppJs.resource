@@ -95,7 +95,7 @@ var GIS = (function () {
     fetchAis: function (inputAddress) {
       console.log("fetch ais:", inputAddress);
 
-      var url = '//api.phila.gov/ais/v1/addresses/' + encodeURIComponent(inputAddress);
+      var url = GIS.config.ais.baseUrl + encodeURIComponent(inputAddress);
 
       // clear out state
       GIS.state.aisFeature = null;
@@ -103,12 +103,7 @@ var GIS = (function () {
 
       $.ajax({
         url: url,
-        data: {
-          include_units: true,
-          on_street: true,
-          opa_only: true,
-          gatekeeperKey: 'cb076d7301c315ba0f039b8f7744ac6d',
-        },
+        data: GIS.config.ais.params,
         success: GIS.didFetchAis,
         error: GIS.didNotFetchAis,
       });
