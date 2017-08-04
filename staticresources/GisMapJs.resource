@@ -162,11 +162,15 @@ GIS.map = (function () {
       // get ids
       var $link = $(this),
           caseId = $link.attr('data-case-id'),
-          caseNumber = $link.attr('data-case-number');
+          caseNumber = $link.attr('data-case-number'),
+          caseObj = {
+            id: caseId,
+            num: caseNumber
+          };
 
       // to "relate" one case to another, we set the parent id to the related's
       // case id.
-      GIS.saveGeodata(caseId);
+      GIS.saveGeodata(caseObj);
 
       alert('This case has been related to case #' + caseNumber + '.');
     },

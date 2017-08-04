@@ -362,9 +362,10 @@ var GIS = (function () {
       );
     },
 
-    // this takes an optional argument `parentId` which is used when relating
-    // cases
-    saveGeodata: function (parentId) {
+    // this takes an optional argument `parentCase` which is used when relating
+    // cases. parentCase should be an object with two keys: id and caseNumber.
+    // id is the guid of the case, and caseNumber is the shorter numeric id.
+    saveGeodata: function (parentCase) {
       console.log('save geodata', feature, layerInfo);
 
       var state = GIS.state,
@@ -373,7 +374,7 @@ var GIS = (function () {
           // parentId = state.parentId;
 
       // pass data back to parent window
-      var geodata = GIS.createGeodataObject(feature, layerInfo, parentId);
+      var geodata = GIS.createGeodataObject(feature, layerInfo, parentCase);
       console.log('geodata', geodata);
 
       // DEBUG: if window.opener isn't defined, we're probably just testing this
@@ -387,7 +388,7 @@ var GIS = (function () {
     },
 
     // takes an ais feature and formats it as a "geodata" object which the parent window can understand.
-    createGeodataObject: function (feature, layerInfo, parentId) {
+    createGeodataObject: function (feature, layerInfo, parentCase) {
       console.log('create geodata object', feature, layerInfo);
 
       var props = feature.properties,
@@ -395,7 +396,10 @@ var GIS = (function () {
           coordsStatePlane = proj4('EPSG:2272', coords),
           // parent page checks for the token `Intersection`, so camel case this
           matchType = GIS.toCamelCase(feature.ais_feature_type),
-          addressKey = (props.li_address_key || '').split('|')[0];
+          addressKey = (props.li_address_key || '').split('|')[0],
+          parentCase = parentCase || {},
+          parentId = parentCase.id,
+          label = parentCase.num;
 
       // we're now getting the L&I district from AIS
       if (layerInfo) {
@@ -422,8 +426,9 @@ var GIS = (function () {
           // this gets passed in when "relating" one case to another
           parentId: parentId,
 
-          // REVIEW this seems to be related to the parent case
-          label: null,
+          // this is the number that populates the parent case field when
+          // relating
+          label: label,
 
           x: coords[0],
           y: coords[1],
