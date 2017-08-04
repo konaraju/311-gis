@@ -15,8 +15,15 @@ global class GisClient {
 
 		// run query
 		List<Case> cases = [
-			SELECT Id, CaseNumber, Subject, Street__c, Centerline__longitude__s, Centerline__latitude__s
-			FROM Case
+      SELECT
+        Id,
+        CaseNumber,
+        Subject,
+        Street__c,
+        Centerline__longitude__s,
+        Centerline__latitude__s
+			FROM
+        Case
 			WHERE
         Centerline_2272x__c != null AND
 		    Centerline_2272y__c != null AND
