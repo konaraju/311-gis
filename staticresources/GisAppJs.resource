@@ -78,15 +78,18 @@ var GIS = (function () {
     toCamelCase: function (s) {
       return s.replace(
         /\w+/g,
-            function (w) { return w[0].toUpperCase() + w.slice(1).toLowerCase(); }
-          );
+        function (w) {
+          return w[0].toUpperCase() + w.slice(1).toLowerCase();
+        }
+      );
     },
 
     // handle clicks to the locate button
     handleSearchButtonClick: function (e) {
       GIS.setSearchAction('Validating address');
-      // $('#multiple').css('display','none');
+
       var inputAddress = $searchInput.val();
+
       GIS.fetchAis(inputAddress);
     },
 
