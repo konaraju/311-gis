@@ -31,15 +31,21 @@ var GIS = (function () {
       if (window.opener) {
         var searchInput = window.opener.getSearchInput();
         $searchInput.val(searchInput);
+
+        // if there's search input, "click" the locate button
+        if (searchInput.length > 0) {
+          GIS.handleSearchButtonClick();
+        }
       }
 
       // listen for 'enter' key on address input
       $searchInput.on('keyup', function (e) {
-          if (e.keyCode == 13) {
-              GIS.handleSearchButtonClick();
-          }
+        if (e.keyCode == 13) {
+          GIS.handleSearchButtonClick();
+        }
       });
 
+      // if there's something in the search input
       $('#search-button').click(GIS.handleSearchButtonClick);
 
       /*
