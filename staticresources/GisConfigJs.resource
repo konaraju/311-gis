@@ -163,6 +163,9 @@ var GIS_CONFIG = {
     SA_LNI_DISTRICT: 'li_district',
     SA_POLICE_PSA: 'police_service_area',
     SA_WATER_Water_Plate_Index: 'pwd_water_plate',
+    LadderLocal: 'ladder_local',
+    EngineLocal: 'engine_local',
+    
 
     // don't think these exist in ais
     // SA_PLANNING_2000CensusTract,
