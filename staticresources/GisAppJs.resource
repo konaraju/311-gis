@@ -10,8 +10,14 @@ var GIS = (function () {
     config: GIS_CONFIG,
     // initial state. this is really only here to spec out what the state looks
     // like.
+    // REVIEW should initial values be null, since they get reset to null on
+    // each ais search?
     state: {
+      // this is the ais feature that matched the user's search
       aisFeature: {},
+      // this gets used when there are multiple matching ais features
+      multipleResults: [],
+      // this stores related data, such as service areas
       layerInfo: {},
     },
     init: function () {
@@ -56,13 +62,25 @@ var GIS = (function () {
       });
       // $multipleResultsSelect.change(function (e) {
       $multipleResultsButton.click(function (e) {
-        var val = $multipleResultsSelect.val();
-        // geocode
-        GIS.fetchAis(val);
+        // get index of selected option
+        var i = $multipleResultsSelect.find('option:selected').index();
+
+        // pass selected address to ais callback
+        // (this is not ideal but ais doesn't currently have a way to validate
+        // a single address)
+        var aisFeature = GIS.state.multipleResults[i],
+            featureData = {
+              features: [aisFeature],
+            };
+        GIS.didFetchAis(featureData);
+
         // empty dropdown
         $multipleResultsSelect.empty()
         // hide modal
         $multipleResultsModal.fadeOut(ANIMATION_DELAY);
+
+        // clear out state
+        GIS.state.multipleResults = null;
       });
     },
 
@@ -136,6 +154,8 @@ var GIS = (function () {
 
       // if we got multiple results
       } else if (resultCount > 1) {
+        GIS.state.multipleResults = features;
+
         // show dropdown
         GIS.showMultipleResults(features);
 
