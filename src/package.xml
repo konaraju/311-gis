@@ -14,5 +14,9 @@
         <members>GisMapJs</members>
         <name>StaticResource</name>
     </types>
+    <types>
+        <members>CaseAfterUpdate</members>
+        <name>ApexTrigger</name>
+    </types>
     <version>38.0</version>
 </Package>
