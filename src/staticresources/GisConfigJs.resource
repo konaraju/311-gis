@@ -4,11 +4,13 @@ var GIS_CONFIG = {
   nearbyRadius: 500,
   // Address Information System config. this is the api that handles geocoding.
   ais: {
+    // TODO put this in a global variable
     baseUrl: '//api.phila.gov/ais/v1/search/',
     params: {
       include_units: true,
       on_street: true,
       opa_only: true,
+      // TODO put this in a global variable
       gatekeeperKey: 'cb076d7301c315ba0f039b8f7744ac6d',
     },
   },
