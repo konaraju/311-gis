@@ -7,15 +7,27 @@ trigger CaseAfterUpdate on Case (after insert, after update) {
     list<Case> caseList = new list<Case>();
     list<string> caseIdList = new list<string>();
     for (Case each : Trigger.new) {
-        if (String.IsNotBlank(each.street__c) &&(each.Case_Record_Type__c != 'LI Escalation')  &&(each.Origin != 'Email')&&(
-            each.Centerline_2272x__c == 0 || each.Centerline_2272y__c == 0 ||
-            each.Centerline_2272x__c == null || each.Centerline_2272y__c == null)) {
+        if (
+          // it has an address
+          String.IsNotBlank(each.street__c) &&
+          // it's not an l&i escalation
+          each.Case_Record_Type__c != 'LI Escalation' &&
+          // it wasn't created via email
+          each.Origin != 'Email' &&
+          // it doesn't have a state plane geometry
+          (
+            each.Centerline_2272x__c == 0 ||
+            each.Centerline_2272y__c == 0 ||
+            each.Centerline_2272x__c == null ||
+            each.Centerline_2272y__c == null
+          )
+        ) {
             caseList.add(each);
             caseIdList.add(each.id);
         }
     }
-    
+
     system.debug(caseIdList);
-     
+
     CaseWrapper.ConvertCenterlineTo2272(caseIdList);
 }
