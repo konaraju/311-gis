@@ -16,7 +16,22 @@ public with sharing class AisApi {
   */
 
   // fetch a response from the api
-  public AisResponse addresses(string searchAddress) {
+  public Map<String, Object> addresses(string searchAddress) {
+    system.debug('* AisApi.addresses *');
+
+    // create http client
+    Http http = new Http();
+
     // make request
+    HttpRequest req = new HttpRequest();
+    req.setEndpoint(this.baseUrl);
+    req.setMethod('GET');
+
+    // send and get response body
+    HttpResponse res = http.send(req);
+    string body = res.getBody();
+
+    // return parsed ais response obj
+    return (Map<String, Object>) Json.deserializeUntyped(body);
   }
 }
