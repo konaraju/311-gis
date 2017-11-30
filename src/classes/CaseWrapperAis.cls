@@ -228,7 +228,7 @@ public with sharing class CaseWrapperAis {
         // get state plane geometry -- we could use an arcgis server geometry
         // service for this, but it's easier to just query ais again, passing
         // in an arg for the spatial reference id.
-        Map<String, Object> responseSP = aisApi.addresses(caseAddress, 2272);
+        Map<String, Object> responseSP = fetchAis(aisApi, caseAddress, 2272);
         Object[] featuresSP = (Object[])responseSP.get('features');
 
         // pick first address feature.
