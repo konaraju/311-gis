@@ -96,15 +96,25 @@ public with sharing class CaseWrapperAis {
   // helper method for getting an ais response and making sure there's a valid
   // result
   static Map<String, Object> fetchAis(AisApi aisApi, String searchAddress) {
-    // query ais
     Map<String, Object> response = aisApi.addresses(searchAddress);
+    return validateAisResponse(response);
+  }
 
+  static Map<String, Object> fetchAis(AisApi aisApi,
+                                      String searchAddress,
+                                      Integer srid) {
+    Map<String, Object> response = aisApi.addresses(searchAddress, srid);
+    return validateAisResponse(response);
+  }
+
+  static Map<String, Object> validateAisResponse (Map<String, Object> response)
+  {
     // check for a good response
     Integer status = (Integer)response.get('status');
     Object[] features = (Object[])response.get('features');
 
     // if we didn't get one
-    if (status != 200) {
+    if (status != 200 || features.size() < 1) {
       throw new AisNotFoundException();
     }
 
