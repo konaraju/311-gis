@@ -182,7 +182,7 @@ public with sharing class CaseWrapperAis {
     // instantiate ais api
     AisApi aisApi = new AisApi(
       // TODO make these global vars
-      'https://api.phila.gov/ais/v1/addresses/',
+      'http://api.phila.gov/ais/v1/addresses/',
       'cb076d7301c315ba0f039b8f7744ac6d'
     );
 
