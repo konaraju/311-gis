@@ -212,9 +212,9 @@ public with sharing class CaseWrapperAis {
         // unpack address props and geometry
         String streetAddress = (String)feature.get('street_address');
         Map<String, Object> geom = (Map<String, Object>)feature.get('geometry');
-        Decimal[] coords = (Decimal[])geom.get('coordinates');
-        Decimal lon = coords[0];
-        Decimal lat = coords[1];
+        Object[] coords = (Object[])geom.get('coordinates');
+        Decimal lon = (Decimal)coords[0];
+        Decimal lat = (Decimal)coords[1];
         String matchType = (String)geom.get('geocode_type');
         Map<String, Object> props = (Map<String, Object>)feature
                                       .get('properties');
@@ -250,9 +250,9 @@ public with sharing class CaseWrapperAis {
         // unpack state plane geom
         Map<String, Object> geomSP = (Map<String, Object>)featureSP
                                         .get('geometry');
-        Decimal[] coordsSP = (Decimal[])geomSP.get('coordinates');
-        Decimal xSP = coordsSP[0];
-        Decimal ySP = coordsSP[1];
+        Object[] coordsSP = (Object[])geomSP.get('coordinates');
+        Decimal xSP = (Decimal)coordsSP[0];
+        Decimal ySP = (Decimal)coordsSP[1];
 
         // save to case
         aCase.centerline_2272x__c = xSP;
