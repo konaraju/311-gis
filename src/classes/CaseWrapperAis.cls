@@ -210,7 +210,6 @@ public with sharing class CaseWrapperAis {
         Map<String, Object> feature = (Map<String, Object>)features[0];
 
         // unpack address props and geometry
-        String streetAddress = (String)feature.get('street_address');
         Map<String, Object> geom = (Map<String, Object>)feature.get('geometry');
         Object[] coords = (Object[])geom.get('coordinates');
         Decimal lon = (Decimal)coords[0];
@@ -220,7 +219,7 @@ public with sharing class CaseWrapperAis {
                                       .get('properties');
 
         // populate fields in case
-        aCase.Street__c = streetAddress;
+        aCase.Street__c = (String)props.get('street_address');
         aCase.Centerline__Longitude__s = lon;
         aCase.Centerline__Latitude__s = lat;
         aCase.Centerline_Match_Type__c = matchType;
