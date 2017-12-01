@@ -111,8 +111,7 @@ public with sharing class CaseWrapperAis {
     return validateAisResponse(response);
   }
 
-  static Map<String, Object> validateAisResponse (Map<String, Object> response)
-  {
+  static Map<String, Object> validateAisResponse(Map<String, Object> response) {
     // check for a good response
     Integer status = (Integer)response.get('status');
     Object[] features = (Object[])response.get('features');
