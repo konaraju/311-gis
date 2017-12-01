@@ -145,7 +145,10 @@ public with sharing class CaseWrapperAis {
     }
 
     Group citiworksRejectGroup = [
-      select id from group where developerName = 'CitiWorks_Reject' limit 1
+      select id
+      from group
+      where developerName = 'CitiWorks_Reject'
+      limit 1
     ];
     Group mobileReviewGroup = [
       select id
