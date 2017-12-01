@@ -117,6 +117,11 @@ public with sharing class CaseWrapperAis {
     Integer status = (Integer)response.get('status');
     Object[] features = (Object[])response.get('features');
 
+    // ais doesn't return a status for good searches, so default to 200
+    if (status == null) {
+      status = 200;
+    }
+
     // if we didn't get one
     if (status != 200 || features.size() < 1) {
       throw new AisNotFoundException();
