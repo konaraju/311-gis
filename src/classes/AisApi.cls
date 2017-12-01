@@ -24,7 +24,15 @@ public with sharing class AisApi {
     Http http = new Http();
 
     // form url
-    String url = this.baseUrl + '?srid=' + String.valueOf(srid);
+    String[] urlParts = new String[]{
+      this.baseUrl,
+      searchAddress,
+      '?gatekeeperKey=',
+      this.gatekeeperKey,
+      '&srid=',
+      String.valueOf(srid)
+    };
+    String url = String.join(urlParts, '');
 
     // make request
     HttpRequest req = new HttpRequest();
