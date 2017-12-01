@@ -44,6 +44,6 @@ public with sharing class AisApi {
     String body = res.getBody();
 
     // return parsed ais response obj
-    return (Map<String, Object>) Json.deserializeUntyped(body);
+    return (Map<String, Object>)Json.deserializeUntyped(body);
   }
 }
