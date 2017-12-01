@@ -255,7 +255,7 @@ public with sharing class CaseWrapperAis {
       } catch (Exception e) {
         system.debug('EXCEPTION');
         system.debug('case: ' + aCase);
-        system.debug('e:' + e);
+        system.debug('e: ' + e);
 
         // determine which owner id to give the case before we reject it
         if (recordTypesRequiringGeocode.contains(aCase.RecordTypeId)) {
