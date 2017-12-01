@@ -60,12 +60,14 @@ public with sharing class CaseWrapperAis {
   // the public stuff web and mobile apps that use the google maps api.
   // (google probably returns lat/lon or web mercator.)
   public static void regeocode(String[] caseIds) {
+    system.debug('** CaseWrapperAis.regeocode **');
+
     if (caseIds.isEmpty()) {
       return;
     }
 
     if (system.isFuture()) {
-      // system.debug('already in the future?');
+      system.debug('is future');
 
       regeocodeNow(caseIds);
     } else {
@@ -96,6 +98,8 @@ public with sharing class CaseWrapperAis {
   // helper method for getting an ais response and making sure there's a valid
   // result
   static Map<String, Object> fetchAis(AisApi aisApi, String searchAddress) {
+    // system.debug('fetch ais: ' + searchAddress);
+
     Map<String, Object> response = aisApi.addresses(searchAddress);
     return validateAisResponse(response);
   }
@@ -127,7 +131,7 @@ public with sharing class CaseWrapperAis {
   input: a String[] of case ids
   */
   static void regeocodeNow(String[] caseIds) {
-    system.debug('* CaseWrapperAis.regeocodeNow *');
+    system.debug('** CaseWrapperAis.regeocodeNow **');
     // system.debug('case ids: ' + caseIds);
     // system.debug('has future fired: ' + hasFutureFired);
 
