@@ -1,11 +1,11 @@
 /*
 CaseWrapperAis is version of the original CaseWrapper that has been modified to
-use the Address Information System (AIS) instead of ULRS for geocoding. Despite
-the generic name, this class is really only used to process cases from the
-mobile and web PublicStuff apps which are geocoded initially using the Google
-Maps API. For various reasons, we need to augment the Google geocode using
-metadata about the address from AIS, such as standardized address, State Plane
-coordinates, and service areas.
+use the Address Information System (AIS) instead of ULRS for geocoding. This
+class is really only used to process cases from the mobile and web PublicStuff
+apps which are geocoded initially using the Google Maps API. For various
+reasons, we need to augment the Google geocode using metadata about the address
+from AIS, such as standardized address, State Plane coordinates, and service
+areas.
 */
 
 public with sharing class CaseWrapperAis {
