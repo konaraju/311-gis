@@ -1,5 +1,5 @@
 Trigger CaseAfterUpdate on Case (after insert, after update) {
-  list<string> caseIds = new list<string>();
+  String[] caseIds = new String[]{};
 
   for (Case aCase : Trigger.new) {
     if (
