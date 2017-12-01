@@ -2,6 +2,10 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>GisClient</members>
+        <members>AisApi</members>
+        <members>AisApiTest</members>
+        <members>CaseWrapperAisTest</members>
+        <members>CaseWrapperAis</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -12,6 +16,8 @@
         <members>GisAppJs</members>
         <members>GisConfigJs</members>
         <members>GisMapJs</members>
+        <members>AisApiTestMockJson</members>
+        <members>AisApiTestMockErrorJson</members>
         <name>StaticResource</name>
     </types>
     <types>
