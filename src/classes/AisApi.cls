@@ -18,15 +18,19 @@ public with sharing class AisApi {
   }
 
   public Map<String, Object> addresses(String searchAddress, Integer srid) {
-    system.debug('* AisApi.addresses *');
+    // system.debug('* AisApi.addresses *');
+    // system.debug('search address: ' + searchAddress);
 
     // create http client
     Http http = new Http();
 
+    // handle spaces in search address
+    String searchAddressEncoded = searchAddress.replace(' ', '%20');
+
     // form url
     String[] urlParts = new String[]{
       this.baseUrl,
-      searchAddress,
+      searchAddressEncoded,
       '?gatekeeperKey=',
       this.gatekeeperKey,
       '&srid=',
