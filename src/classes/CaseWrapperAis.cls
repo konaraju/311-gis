@@ -71,6 +71,8 @@ public with sharing class CaseWrapperAis {
 
       regeocodeNow(caseIds);
     } else {
+      system.debug('is not future');
+
       // we want to avoid re-running in the present
       // as well as the future. since the static variable
       // has a different context both now and in the future
