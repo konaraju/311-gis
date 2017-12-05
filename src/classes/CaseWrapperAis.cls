@@ -19,7 +19,7 @@ public with sharing class CaseWrapperAis {
   static Boolean hasFutureFired = false;
   static Boolean hasAfterUpdateFired = false;
 
-  // heper method to return a set of request type ids that require geocoding
+  // helper method to return a set of request type ids that require geocoding
   static Set<id> getRecordTypesRequiringGeocode() {
     // query request type ids
     X311RequestType__c[] requestTypeIds = [
