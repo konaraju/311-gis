@@ -1,16 +1,20 @@
 GIS.map = (function () {
   var map,
-    geocodeMarker,
-    relatedMarkers;
+      spiderfier,
+      geocodeMarker,
+      relatedMarkers,
+      POPUP_OPTIONS = {
+        minWidth: 130,
+      };
 
   return {
     init: function () {
       var MAP_OPTIONS = {
-          // center over city hall
-          center: [39.952388, -75.1658127],
-          minZoom: 11,
-          zoom: 15,
-        };
+            // center over city hall
+            center: [39.952388, -75.1658127],
+            minZoom: 11,
+            zoom: 15,
+          };
 
       // create map
       map = L.map('map', MAP_OPTIONS);
@@ -31,6 +35,16 @@ GIS.map = (function () {
         url: '//tiles.arcgis.com/tiles/fLeGjb7u4uXqeF9q/arcgis/rest/services/CityBasemap_Slash/MapServer',
         maxZoom: 22,
       }).addTo(map);
+
+      // create spiderfier (this is an object that expands, aka "spiderfies"
+      // overlapping map markers when clicked on)
+      spiderfier = new OverlappingMarkerSpiderfier(map);
+
+      spiderfier.addListener('click', function (marker) {
+        var popup = marker.popup;
+        popup.setLatLng(marker.getLatLng());
+        map.openPopup(popup);
+      });
 
       // listen for relate clicks
       $(document).on('click', '.relate-link', GIS.map.handleRelateClick);
@@ -71,7 +85,7 @@ GIS.map = (function () {
           }),
           marker = new L.marker([lat, lng], {icon: icon});
 
-      console.log('marker', marker);
+      // console.log('marker', marker);
 
       return marker;
     },
@@ -90,32 +104,27 @@ GIS.map = (function () {
     },
 
     addGeocodeMarker: function (x, y, address) {
-      console.log('add geocode marker', x, y);
+      // console.log('add geocode marker', x, y);
 
       GIS.map.removeMarkers();
 
-      //geocodeMarker = L.marker([y, x]);
-
       geocodeMarker = this.colorMarker(y, x, 'yellow');
 
-      var popup = '\
-        <div>\
-          <strong>' + address + '</strong>' + '\
-        </div>\
-        <div>\
-          <a href="http://atlas.phila.gov/#/' + address + '/" target="_blank">\
-            See more in Atlas <span class="fa fa-external-link"></span>\
-          </a>\
-        </div>\
-      ';
+      var popupContent = '\
+            <div>\
+              <strong>' + address + '</strong>' + '\
+            </div>\
+            <div>\
+              <a href="http://atlas.phila.gov/#/' + address + '/" target="_blank">\
+                See more in Atlas <span class="fa fa-external-link"></span>\
+              </a>\
+            </div>\
+          ',
+          popup = new L.Popup(POPUP_OPTIONS).setContent(popupContent);
 
-      geocodeMarker.bindPopup(popup, {
-        minWidth: 130,
-      });
-
+      geocodeMarker.popup = popup;
       geocodeMarker.addTo(map);
-
-      geocodeMarker.openPopup();
+      spiderfier.addMarker(geocodeMarker);
     },
 
     addRelatedMarkers: function (relateds) {
@@ -131,7 +140,7 @@ GIS.map = (function () {
             caseNumber = related.CaseNumber,
             caseType = related.Subject,
             address = related.Street__c,
-            popup = '\
+            popupContent = '\
               <div>' +
                 '<strong>' + address + ': ' + caseType + '</strong>\
               </div>\
@@ -149,9 +158,11 @@ GIS.map = (function () {
               </div>\
             ';
 
-        marker.bindPopup(popup);
-        marker.addTo(map);
+        marker.popup = new L.Popup(POPUP_OPTIONS)
+                              .setContent(popupContent);
 
+        marker.addTo(map);
+        spiderfier.addMarker(marker);
         relatedMarkers.push(marker);
       });
     },
