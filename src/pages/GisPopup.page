@@ -151,11 +151,4 @@
   <script src="{!URLFOR($Resource.GisConfigJs)}"></script>
   <script src="{!URLFOR($Resource.GisAppJs)}"></script>
   <script src="{!URLFOR($Resource.GisMapJs)}"></script>
-  <!-- Added by Raju Kona for   11549434 START-->
-  <script type="text/javascript">
-           onload =function(){
-           GIS.handleSearchButtonClick();
-         }
-   <!-- Added by Raju Kona for   11549434 END-->
-   </script>
 </apex:page>
