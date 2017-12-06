@@ -128,7 +128,7 @@ GIS.map = (function () {
     },
 
     addRelatedMarkers: function (relateds) {
-      console.log('add related markers', relateds);
+      // console.log('add related markers', relateds);
 
       _.forEach(relateds, function (related) {
         var lat = related.Centerline__Latitude__s,
