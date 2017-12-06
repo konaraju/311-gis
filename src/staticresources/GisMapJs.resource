@@ -24,10 +24,10 @@ GIS.map = (function () {
 
       map.attributionControl.addAttribution('City of Philadelphia | CityGeo');
 
-      // DEBUG but useful and harmless so i'm leaving it on :)
-      map.on('zoomend', function (e) {
-        console.log('zoomend', e.target.getZoom());
-      });
+      // DEBUG
+      // map.on('zoomend', function (e) {
+      //   console.log('zoomend', e.target.getZoom());
+      // });
 
       // add gsg city basemap with labels
       // REVIEW add labels separately?
@@ -168,7 +168,7 @@ GIS.map = (function () {
     },
 
     handleRelateClick: function (e) {
-      console.log('handle relate click', e);
+      // console.log('handle relate click', e);
 
       // get ids
       var $link = $(this),
