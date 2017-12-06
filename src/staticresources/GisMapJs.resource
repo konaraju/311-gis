@@ -18,7 +18,7 @@ GIS.map = (function () {
       // move zoom control to bottom-right, a la google
       map.zoomControl.setPosition('bottomright');
 
-      map.attributionControl.addAttribution('City of Philadelphia GIS Services Group');
+      map.attributionControl.addAttribution('City of Philadelphia | CityGeo');
 
       // DEBUG but useful and harmless so i'm leaving it on :)
       map.on('zoomend', function (e) {
