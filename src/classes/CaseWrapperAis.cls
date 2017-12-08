@@ -192,7 +192,7 @@ public with sharing class CaseWrapperAis {
     AisApi aisApi = new AisApi(
       // TODO make these global vars
       'http://api.phila.gov/ais/v1/addresses/',
-      'cb076d7301c315ba0f039b8f7744ac6d'
+      'c1251687d61e95b95303bd87616be44b'
     );
 
     // loop over cases
