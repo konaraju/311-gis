@@ -120,7 +120,7 @@ var GIS = (function () {
     // this function gets user input and queries the Address Information System. this is
     // intended to replace the Address Candidate function.
     fetchAis: function (inputAddress) {
-      console.log("fetch ais:", inputAddress);
+      // console.log('fetch ais', inputAddress);
 
       var url = GIS.config.ais.baseUrl + encodeURIComponent(inputAddress);
 
@@ -138,7 +138,7 @@ var GIS = (function () {
 
     // on successful ais fetch
     didFetchAis: function (data) {
-      console.log('did fetch ais', data);
+      // console.log('did fetch ais', data);
 
       GIS.setSearchAction(null);
 
@@ -168,6 +168,7 @@ var GIS = (function () {
       // if we got no results
       } else {
         console.log('ais successful but no features');
+
         alert('Could not locate that address. Please try another search.');
       }
     },
@@ -230,7 +231,7 @@ var GIS = (function () {
     },
 
     didGetValidAddress: function (feature) {
-      console.log('did get valid address', feature);
+      // console.log('did get valid address', feature);
 
       var coords = feature.geometry.coordinates,
         x = coords[0],
@@ -258,7 +259,7 @@ var GIS = (function () {
     },
 
     fetchLayerInfo: function (feature, caseType) {
-      console.log('fetch layer info', feature, caseType);
+      // console.log('fetch layer info', feature, caseType);
 
       GIS.setSearchAction('Querying layers');
 
@@ -377,7 +378,7 @@ var GIS = (function () {
             return;
           }
 
-          console.log('async parallel finished', results);
+          // console.log('async parallel finished', results);
 
           // save to state
           GIS.state.layerInfo = results;
@@ -485,7 +486,7 @@ var GIS = (function () {
     },
 
     fetchRelated: function () {
-      console.log('fetch related');
+      // console.log('fetch related');
 
       GIS.setSearchAction('Locating nearby cases');
 
@@ -506,7 +507,7 @@ var GIS = (function () {
     },
 
     didFetchRelated: function (results, event) {
-      console.log('did fetch related', results, event);
+      // console.log('did fetch related', results, event);
 
       GIS.setSearchAction(null);
 

@@ -138,6 +138,7 @@
   <script src="//unpkg.com/esri-leaflet@2.0.8"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/async/2.5.0/async.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.3/proj4.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
 
   <!-- Sentry for error logging -->
   <script src="//cdn.ravenjs.com/3.16.1/raven.min.js" crossorigin="anonymous"></script>
@@ -149,11 +150,4 @@
   <script src="{!URLFOR($Resource.GisConfigJs)}"></script>
   <script src="{!URLFOR($Resource.GisAppJs)}"></script>
   <script src="{!URLFOR($Resource.GisMapJs)}"></script>
-  <!-- Added by Raju Kona for   11549434 START-->
-  <script type="text/javascript">
-           onload =function(){
-           GIS.handleSearchButtonClick();
-         }
-   <!-- Added by Raju Kona for   11549434 END-->
-   </script>
 </apex:page>

@@ -192,7 +192,7 @@ public with sharing class CaseWrapperAis {
     AisApi aisApi = new AisApi(
       // TODO make these global vars
       'http://api.phila.gov/ais/v1/addresses/',
-      'cb076d7301c315ba0f039b8f7744ac6d'
+      'c1251687d61e95b95303bd87616be44b'
     );
 
     // loop over cases
@@ -230,12 +230,14 @@ public with sharing class CaseWrapperAis {
         aCase.L_I_Address__c = (String)props.get('opa_address');
 
         // populate service areas
-        aCase.Pickup_Day__c = (String)props.get('SA_STREETS_Rubbish');
-        aCase.Center_City_District__c = (String)props.get('SA_CENTER_CITY_DISTRICT');
-        aCase.Council_District__c = (String)props.get('SA_PLANNING_2016Councilmanic');
-        aCase.Council_District_No__c = (String)props.get('SA_PLANNING_2016Councilmanic');
-        aCase.ZipCode__c = (String)props.get('SA_STREETS_ZipCode');
-        aCase.Police_District__c = (String)props.get('SA_POLICE_District');
+        aCase.Pickup_Day__c = (String)props.get('rubbish_recycle_day');
+        aCase.Center_City_District__c = (String)props.get('center_city_district');
+        aCase.Council_District__c = (String)props.get('council_district_2016');
+        aCase.Council_District_No__c = (String)props.get('council_district_2016');
+        aCase.ZipCode__c = (String)props.get('zip_code');
+        aCase.Police_District__c = (String)props.get('police_district');
+        aCase.LadderLocal__c = (String)props.get('ladder_local');
+        aCase.EngineLocal__c = (String)props.get('engine_local');
 
         // get state plane geometry -- we could use an arcgis server geometry
         // service for this, but it's easier to just query ais again, passing

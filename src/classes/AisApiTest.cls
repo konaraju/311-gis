@@ -15,7 +15,7 @@ private class AisApiTest {
     // TODO put following args into global variables
     AisApi aisApi = new AisApi(
       'https://api.phila.gov/ais/v1/addresses/',
-      'cb076d7301c315ba0f039b8f7744ac6d'
+      'c1251687d61e95b95303bd87616be44b'
     );
 
     // get address results
@@ -40,7 +40,7 @@ private class AisApiTest {
     // TODO put following args into global variables
     AisApi aisApi = new AisApi(
       'https://api.phila.gov/ais/v1/addresses/',
-      'cb076d7301c315ba0f039b8f7744ac6d'
+      'c1251687d61e95b95303bd87616be44b'
     );
 
     // get address results
