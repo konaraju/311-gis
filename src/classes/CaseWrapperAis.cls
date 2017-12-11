@@ -236,8 +236,8 @@ public with sharing class CaseWrapperAis {
         aCase.Council_District_No__c = (String)props.get('council_district_2016');
         aCase.ZipCode__c = (String)props.get('zip_code');
         aCase.Police_District__c = (String)props.get('police_district');
-        aCase.LadderLocal__c = (String)props.get('ladder_local');
-        aCase.EngineLocal__c = (String)props.get('engine_local');
+        aCase.Ladder_Local__c = (String)props.get('ladder_local');
+        aCase.Engine_Local__c = (String)props.get('engine_local');
 
         // get state plane geometry -- we could use an arcgis server geometry
         // service for this, but it's easier to just query ais again, passing
