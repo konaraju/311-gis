@@ -112,13 +112,18 @@ GIS.map = (function () {
 
       var popupContent = '\
             <div>\
-              <strong>' + address + '</strong>' + '\
-            </div>\
-            <div>\
-              <a href="http://atlas.phila.gov/#/' + address + '/" target="_blank">\
-                See more in Atlas <span class="fa fa-external-link"></span>\
-              </a>\
-            </div>\
+          <strong>' + address + '</strong>' + '\
+        </div>\
+        <div>\
+          <a href="http://cityatlas.phila.gov/#/' + address + '/" target="_blank">\
+            Internal Map For SF Users <span class="fa fa-external-link"></span>\
+          </a>\
+        </div>\
+		<div>\
+          <a href="https://atlas.phila.gov/#/' + address + '/" target="_blank">\
+            External Map For Partners Users <span class="fa fa-external-link"></span>\
+          </a>\
+        </div>\
           ',
           popup = new L.Popup(POPUP_OPTIONS).setContent(popupContent);
 
